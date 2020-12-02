@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/XMLPropertyTree.dir/main.cpp.o CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o  -o XMLPropertyTree 
