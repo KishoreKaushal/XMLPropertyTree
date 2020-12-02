@@ -7,7 +7,6 @@
 #include <utility>
 #include <unordered_map>
 #include <vector>
-#include <exception>
 
 
 #ifndef XMLPROPERTYTREE_XMLPROPERTYTREE_H
@@ -17,13 +16,17 @@ namespace XMLPropertyTree {
 
     class XMLElement {
     public:
-        virtual std::string getCharacterData(const std::string&) const noexcept;
+        virtual std::string getData(const std::string&) const noexcept;
 
         virtual std::string getAttributeValue(const std::string&) const noexcept;
 
-        virtual std::shared_ptr<XMLElement> getChildElement();
+        virtual std::shared_ptr<XMLElement> nthChildElement(const int&) const noexcept;
 
         virtual void addChildElement(const std::shared_ptr<XMLElement>&) const noexcept;
+
+        virtual std::string operator[](const std::string&) const noexcept;
+
+        virtual std::shared_ptr<XMLElement> operator[](const int&) const noexcept;
 
         /*
          * Make non-copyable, by deleting copy constructor and copy assignment operator.
@@ -33,19 +36,22 @@ namespace XMLPropertyTree {
         XMLElement& operator=(const XMLElement&) = delete;
 
     private:
-        const std::string                                           localname;
-        const std::string                                           qname;
-        const std::string                                           uri;
-        const std::string                                           data;
-        const std::unordered_map<std::string, std::string>          mattr;
-        mutable std::vector<std::shared_ptr<XMLElement const>>      vchild;
+        const std::string                                   localname;
+        const std::string                                   qname;
+        const std::string                                   uri;
+        const std::string                                   data;
+        const std::unordered_map<std::string, std::string>  mattr;
+        mutable std::vector<std::shared_ptr<XMLElement>>    vchild;
     };
 
     class XMLTree {
     public:
+        XMLTree() = default;
+        XMLTree(const XMLElement&) = delete;
+        XMLTree& operator=(const XMLElement&) = delete;
 
     private:
-        std::shared_ptr<XMLElement const>   root;
+        const std::shared_ptr<XMLElement>   root;
     };
 }
 
