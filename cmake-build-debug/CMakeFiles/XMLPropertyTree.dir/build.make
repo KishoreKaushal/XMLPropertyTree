@@ -77,22 +77,9 @@ include CMakeFiles/XMLPropertyTree.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/XMLPropertyTree.dir/flags.make
 
-CMakeFiles/XMLPropertyTree.dir/main.cpp.o: CMakeFiles/XMLPropertyTree.dir/flags.make
-CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaushal/CLionProjects/XMLPropertyTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/XMLPropertyTree.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/XMLPropertyTree.dir/main.cpp.o -c /home/kaushal/CLionProjects/XMLPropertyTree/main.cpp
-
-CMakeFiles/XMLPropertyTree.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/XMLPropertyTree.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaushal/CLionProjects/XMLPropertyTree/main.cpp > CMakeFiles/XMLPropertyTree.dir/main.cpp.i
-
-CMakeFiles/XMLPropertyTree.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/XMLPropertyTree.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaushal/CLionProjects/XMLPropertyTree/main.cpp -o CMakeFiles/XMLPropertyTree.dir/main.cpp.s
-
 CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o: CMakeFiles/XMLPropertyTree.dir/flags.make
 CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o: ../XMLPropertyTree.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaushal/CLionProjects/XMLPropertyTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaushal/CLionProjects/XMLPropertyTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o -c /home/kaushal/CLionProjects/XMLPropertyTree/XMLPropertyTree.cpp
 
 CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.i: cmake_force
@@ -103,17 +90,31 @@ CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaushal/CLionProjects/XMLPropertyTree/XMLPropertyTree.cpp -o CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.s
 
+CMakeFiles/XMLPropertyTree.dir/main.cpp.o: CMakeFiles/XMLPropertyTree.dir/flags.make
+CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaushal/CLionProjects/XMLPropertyTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/XMLPropertyTree.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/XMLPropertyTree.dir/main.cpp.o -c /home/kaushal/CLionProjects/XMLPropertyTree/main.cpp
+
+CMakeFiles/XMLPropertyTree.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/XMLPropertyTree.dir/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaushal/CLionProjects/XMLPropertyTree/main.cpp > CMakeFiles/XMLPropertyTree.dir/main.cpp.i
+
+CMakeFiles/XMLPropertyTree.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/XMLPropertyTree.dir/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaushal/CLionProjects/XMLPropertyTree/main.cpp -o CMakeFiles/XMLPropertyTree.dir/main.cpp.s
+
 # Object files for target XMLPropertyTree
 XMLPropertyTree_OBJECTS = \
-"CMakeFiles/XMLPropertyTree.dir/main.cpp.o" \
-"CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o"
+"CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o" \
+"CMakeFiles/XMLPropertyTree.dir/main.cpp.o"
 
 # External object files for target XMLPropertyTree
 XMLPropertyTree_EXTERNAL_OBJECTS =
 
-XMLPropertyTree: CMakeFiles/XMLPropertyTree.dir/main.cpp.o
 XMLPropertyTree: CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o
+XMLPropertyTree: CMakeFiles/XMLPropertyTree.dir/main.cpp.o
 XMLPropertyTree: CMakeFiles/XMLPropertyTree.dir/build.make
+XMLPropertyTree: /usr/local/lib/libxerces-c.so
 XMLPropertyTree: CMakeFiles/XMLPropertyTree.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kaushal/CLionProjects/XMLPropertyTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable XMLPropertyTree"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/XMLPropertyTree.dir/link.txt --verbose=$(VERBOSE)

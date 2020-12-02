@@ -3,4 +3,9 @@ project(XMLPropertyTree)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(XMLPropertyTree main.cpp XMLPropertyTree.cpp XMLPropertyTree.h)
+find_library(XERCESC xerces-c)
+
+file(GLOB SOURCES "*.cpp")
+
+add_executable(XMLPropertyTree ${SOURCES})
+target_link_libraries(XMLPropertyTree ${XERCESC})
