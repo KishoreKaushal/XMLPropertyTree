@@ -4,20 +4,22 @@
 
 #include <xercesc/sax2/DefaultHandler.hpp>
 
-#ifndef XMLPROPERTYTREE_CREATEPROPERTYTREEHANDLER_H
-#define XMLPROPERTYTREE_CREATEPROPERTYTREEHANDLER_H
+#ifndef XMLPROPERTYTREE_HANDLERPROPERTYTREEFACTORY_H
+#define XMLPROPERTYTREE_HANDLERPROPERTYTREEFACTORY_H
 
 #include <xercesc/sax2/DefaultHandler.hpp>
 #include "XMLPropertyTree.h"
 #include "main.h"
+#include <stack>
+#include <memory>
 
 namespace XMLPropertyTree {
 
-    class CreatePropertyTreeHandler : public xercesc::DefaultHandler {
+    class HandlerPropertyTreeFactory : public xercesc::DefaultHandler {
     public:
-        CreatePropertyTreeHandler();
+        HandlerPropertyTreeFactory();
 
-        ~CreatePropertyTreeHandler();
+        ~HandlerPropertyTreeFactory();
 
         /**---------------------------------------------------------------------
          * Implementation of the SAX DocumentHandler Interface
@@ -55,42 +57,45 @@ namespace XMLPropertyTree {
 
         void warning(const xercesc::SAXParseException& exc) override;
 
+    private:
+        std::unique_ptr<XMLPropertyTree::XMLTree> xmltree;
+        std::stack<std::shared_ptr<XMLElement>> belt;
     };
 
-    void CreatePropertyTreeHandler::characters(const XMLCh *const chars,
-                                               const XMLSize_t length) {
+    void HandlerPropertyTreeFactory::characters(const XMLCh *const chars,
+                                                const XMLSize_t length) {
 
     }
 
-    void CreatePropertyTreeHandler::endElement(const XMLCh *const uri,
-                                               const XMLCh *const localname,
-                                               const XMLCh *const qname) {
+    void HandlerPropertyTreeFactory::endElement(const XMLCh *const uri,
+                                                const XMLCh *const localname,
+                                                const XMLCh *const qname) {
 
     }
 
-    void CreatePropertyTreeHandler::ignorableWhitespace(const XMLCh *const chars,
-                                                        const XMLSize_t length) {
+    void HandlerPropertyTreeFactory::ignorableWhitespace(const XMLCh *const chars,
+                                                         const XMLSize_t length) {
 
     }
 
-    void CreatePropertyTreeHandler::processingInstruction(const XMLCh *const target,
-                                                          const XMLCh *const data) {
+    void HandlerPropertyTreeFactory::processingInstruction(const XMLCh *const target,
+                                                           const XMLCh *const data) {
 
     }
 
-    void CreatePropertyTreeHandler::startDocument() {
+    void HandlerPropertyTreeFactory::startDocument() {
 
     }
 
-    void CreatePropertyTreeHandler::startElement(const XMLCh *const uri,
-                                                 const XMLCh *const localname,
-                                                 const XMLCh *const qname,
-                                                 const xercesc::Attributes& attrs) {
+    void HandlerPropertyTreeFactory::startElement(const XMLCh *const uri,
+                                                  const XMLCh *const localname,
+                                                  const XMLCh *const qname,
+                                                  const xercesc::Attributes& attrs) {
 
 
     }
 
-    void CreatePropertyTreeHandler::error(const xercesc::SAXParseException& exc) {
+    void HandlerPropertyTreeFactory::error(const xercesc::SAXParseException& exc) {
         std::cerr   << "\nError at file " << StrX(exc.getSystemId())
                     << ", line "  << exc.getLineNumber()
                     << ", char "  << exc.getColumnNumber()
@@ -98,7 +103,7 @@ namespace XMLPropertyTree {
                     << std::endl;
     }
 
-    void CreatePropertyTreeHandler::fatalError(const xercesc::SAXParseException& exc) {
+    void HandlerPropertyTreeFactory::fatalError(const xercesc::SAXParseException& exc) {
         std::cerr   << "\nFatal Error at file " << StrX(exc.getSystemId())
                     << ", line "  << exc.getLineNumber()
                     << ", char "  << exc.getColumnNumber()
@@ -106,7 +111,7 @@ namespace XMLPropertyTree {
                     << std::endl;
     }
 
-    void CreatePropertyTreeHandler::warning(const xercesc::SAXParseException& exc) {
+    void HandlerPropertyTreeFactory::warning(const xercesc::SAXParseException& exc) {
         std::cerr   << "\nWarning at file " << StrX(exc.getSystemId())
                     << ", line "  << exc.getLineNumber()
                     << ", char "  << exc.getColumnNumber()
@@ -117,4 +122,4 @@ namespace XMLPropertyTree {
 }
 
 
-#endif //XMLPROPERTYTREE_CREATEPROPERTYTREEHANDLER_H
+#endif //XMLPROPERTYTREE_HANDLERPROPERTYTREEFACTORY_H
