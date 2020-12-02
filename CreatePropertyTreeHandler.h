@@ -8,6 +8,8 @@
 #define XMLPROPERTYTREE_CREATEPROPERTYTREEHANDLER_H
 
 #include <xercesc/sax2/DefaultHandler.hpp>
+#include "XMLPropertyTree.h"
+#include "main.h"
 
 namespace XMLPropertyTree {
 
@@ -85,18 +87,31 @@ namespace XMLPropertyTree {
                                                  const XMLCh *const qname,
                                                  const xercesc::Attributes& attrs) {
 
+
     }
 
     void CreatePropertyTreeHandler::error(const xercesc::SAXParseException& exc) {
-
+        std::cerr   << "\nError at file " << StrX(exc.getSystemId())
+                    << ", line "  << exc.getLineNumber()
+                    << ", char "  << exc.getColumnNumber()
+                    << "\n  Message: " << StrX(exc.getMessage())
+                    << std::endl;
     }
 
     void CreatePropertyTreeHandler::fatalError(const xercesc::SAXParseException& exc) {
-
+        std::cerr   << "\nFatal Error at file " << StrX(exc.getSystemId())
+                    << ", line "  << exc.getLineNumber()
+                    << ", char "  << exc.getColumnNumber()
+                    << "\n  Message: " << StrX(exc.getMessage())
+                    << std::endl;
     }
 
     void CreatePropertyTreeHandler::warning(const xercesc::SAXParseException& exc) {
-
+        std::cerr   << "\nWarning at file " << StrX(exc.getSystemId())
+                    << ", line "  << exc.getLineNumber()
+                    << ", char "  << exc.getColumnNumber()
+                    << "\n  Message: " << StrX(exc.getMessage())
+                    << std::endl;
     }
 
 }
