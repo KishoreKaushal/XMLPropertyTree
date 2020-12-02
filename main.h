@@ -8,9 +8,9 @@
 #ifndef XMLPROPERTYTREE_MAIN_H
 #define XMLPROPERTYTREE_MAIN_H
 
-class StrX {
+class [[maybe_unused]] StrX {
 public:
-    StrX(const XMLCh* const toTranscode) {
+    [[maybe_unused]] explicit StrX(const XMLCh* const toTranscode) {
         fLocalForm = xercesc::XMLString::transcode(toTranscode);
     }
 
@@ -18,7 +18,7 @@ public:
         xercesc::XMLString::release(&fLocalForm);
     }
 
-    const char* localForm() const {
+    [[nodiscard]] const char* localForm() const {
         return fLocalForm;
     }
 
