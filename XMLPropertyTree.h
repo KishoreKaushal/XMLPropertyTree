@@ -28,6 +28,8 @@ namespace XMLPropertyTree {
 
         virtual std::shared_ptr<XMLElement> operator[](const int&) const noexcept;
 
+        virtual bool empty() const noexcept;
+
         /*
          * Make non-copyable, by deleting copy constructor and copy assignment operator.
          * */
@@ -47,8 +49,13 @@ namespace XMLPropertyTree {
     class XMLTree {
     public:
         XMLTree() = default;
+
+        ~XMLTree();
+
         XMLTree(const XMLElement&) = delete;
         XMLTree& operator=(const XMLElement&) = delete;
+
+        virtual bool empty() const noexcept;
 
     private:
         const std::shared_ptr<XMLElement>   root;
