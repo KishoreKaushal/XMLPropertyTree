@@ -5,16 +5,16 @@
 #include "XMLPropertyTree.h"
 
 // TODO: XString(arg)() may go out-of-scope : Need to resolve this.
-XMLPropertyTree::XMLElement::XMLElement(const XMLCh *arguri,
-                                        const XMLCh *arglocalname,
-                                        const XMLCh *argqname,
-                                        const XMLCh *argdata,
-                                        const xercesc::Attributes &argattributes)
+XMLPropertyTree::XMLElement::XMLElement(const XString&              arguri,
+                                        const XString&              arglocalname,
+                                        const XString&              argqname,
+                                        const XString&              argdata,
+                                        const xercesc::Attributes&  argattributes)
                                         noexcept:
-                                            uri(XString(arguri)()),
-                                            localname(XString(arglocalname)()),
-                                            qname(XString(argqname)()),
-                                            data(XString(argdata)()) {
+                                            uri(arguri()),
+                                            localname(arglocalname()),
+                                            qname(argqname()),
+                                            data(argdata()){
 
     // Initializing attribute map
     XMLSize_t numattr = argattributes.getLength();

@@ -22,10 +22,10 @@ namespace XMLPropertyTree {
         /**---------------------------------------------------------------------
          * Explicit Constructor for element initialization.
          *--------------------------------------------------------------------*/
-         explicit XMLElement(const XMLCh*               arguri,
-                             const XMLCh*               arglocalname,
-                             const XMLCh*               argqname,
-                             const XMLCh*               argdata,
+         explicit XMLElement(const XString&             arguri,
+                             const XString&             arglocalname,
+                             const XString&             argqname,
+                             const XString&             argdata,
                              const xercesc::Attributes& argattributes) noexcept;
 
         /*----------------------------------------------------------------------

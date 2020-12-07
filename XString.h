@@ -25,7 +25,7 @@ public:
     /**
      * Making XString a callable object.
      */
-    [[nodiscard]] const char* operator()(){
+    [[nodiscard]] const char* operator()() const {
         return fLocalForm;
     }
 
