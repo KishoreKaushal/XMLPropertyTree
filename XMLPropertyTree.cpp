@@ -68,6 +68,10 @@ std::string XMLPropertyTree::XMLElement::getUri() const noexcept {
     return uri;
 }
 
+void XMLPropertyTree::XMLElement::addChildElement(const std::shared_ptr<XMLElement>& xElement)
+const noexcept {
+    vchild.push_back(xElement);
+}
 
 bool XMLPropertyTree::XMLTree::empty() const noexcept {
     if (root) return root->empty();

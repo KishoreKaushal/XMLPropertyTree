@@ -47,7 +47,7 @@ namespace XMLPropertyTree {
 
         virtual std::shared_ptr<XMLElement> nthChildElement(const int& n) const noexcept;
 
-        virtual void addChildElement(const std::shared_ptr<XMLElement>&) const noexcept;
+        virtual void addChildElement(const std::shared_ptr<XMLElement>& xmlElement) const noexcept;
 
         virtual std::string operator[](const std::string& attr) const noexcept;
 
