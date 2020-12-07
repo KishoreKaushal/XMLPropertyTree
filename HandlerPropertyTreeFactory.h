@@ -104,6 +104,7 @@ namespace XMLPropertyTree {
     }
 
     void HandlerPropertyTreeFactory::error(const xercesc::SAXParseException& exc) {
+        xmltree.reset(nullptr);
         std::cerr   << "\nError at file " << StrX(exc.getSystemId())
                     << ", line "  << exc.getLineNumber()
                     << ", char "  << exc.getColumnNumber()
@@ -112,6 +113,7 @@ namespace XMLPropertyTree {
     }
 
     void HandlerPropertyTreeFactory::fatalError(const xercesc::SAXParseException& exc) {
+        xmltree.reset(nullptr);
         std::cerr   << "\nFatal Error at file " << StrX(exc.getSystemId())
                     << ", line "  << exc.getLineNumber()
                     << ", char "  << exc.getColumnNumber()
@@ -120,6 +122,7 @@ namespace XMLPropertyTree {
     }
 
     void HandlerPropertyTreeFactory::warning(const xercesc::SAXParseException& exc) {
+        xmltree.reset(nullptr);
         std::cerr   << "\nWarning at file " << StrX(exc.getSystemId())
                     << ", line "  << exc.getLineNumber()
                     << ", char "  << exc.getColumnNumber()
