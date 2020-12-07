@@ -23,3 +23,7 @@ XMLPropertyTree::XMLElement::XMLElement(const XMLCh *arguri,
     }
 
 }
+
+std::string XMLPropertyTree::XMLElement::getData(const std::string &) const noexcept {
+    return data;
+}
