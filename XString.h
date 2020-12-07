@@ -5,16 +5,16 @@
 #include <iostream>
 
 
-#ifndef XMLPROPERTYTREE_MAIN_H
-#define XMLPROPERTYTREE_MAIN_H
+#ifndef XMLPROPERTYTREE_XSTRING_H
+#define XMLPROPERTYTREE_XSTRING_H
 
-class [[maybe_unused]] StrX {
+class [[maybe_unused]] XString {
 public:
-    [[maybe_unused]] explicit StrX(const XMLCh* const toTranscode) {
+    [[maybe_unused]] explicit XString(const XMLCh* const toTranscode) {
         fLocalForm = xercesc::XMLString::transcode(toTranscode);
     }
 
-    ~StrX(){
+    ~XString(){
         xercesc::XMLString::release(&fLocalForm);
     }
 
@@ -26,9 +26,9 @@ private:
     char* fLocalForm;
 };
 
-inline std::ostream& operator<<(std::ostream& target, const StrX& toDump) {
+inline std::ostream& operator<<(std::ostream& target, const XString& toDump) {
     target << toDump.localForm();
     return target;
 }
 
-#endif //XMLPROPERTYTREE_MAIN_H
+#endif //XMLPROPERTYTREE_XSTRING_H
