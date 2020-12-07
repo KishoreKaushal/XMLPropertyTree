@@ -7,6 +7,8 @@
 #include <utility>
 #include <unordered_map>
 #include <vector>
+#include <xercesc/sax2/DefaultHandler.hpp>
+#include "XString.h"
 
 
 #ifndef XMLPROPERTYTREE_XMLPROPERTYTREE_H
@@ -16,6 +18,22 @@ namespace XMLPropertyTree {
 
     class XMLElement {
     public:
+        /**---------------------------------------------------------------------
+         * Explicit Constructor for element initialization.
+         *--------------------------------------------------------------------*/
+         explicit XMLElement(const XMLCh*               localname,
+                             const XMLCh*               qname,
+                             const XMLCh*               uri,
+                             const XMLCh*               data,
+                             const xercesc::Attributes& attributes) noexcept;
+
+        /*----------------------------------------------------------------------
+         * Make non-copyable, by deleting copy constructor
+         * and copy assignment operator.
+         *--------------------------------------------------------------------*/
+        XMLElement(const XMLElement&) = delete;
+        XMLElement& operator=(const XMLElement&) = delete;
+
         virtual std::string getData(const std::string&) const noexcept;
 
         virtual std::string getAttributeValue(const std::string&) const noexcept;
@@ -29,13 +47,6 @@ namespace XMLPropertyTree {
         virtual std::shared_ptr<XMLElement> operator[](const int&) const noexcept;
 
         virtual bool empty() const noexcept;
-
-        /*
-         * Make non-copyable, by deleting copy constructor and copy assignment operator.
-         * */
-        XMLElement() = default;
-        XMLElement(const XMLElement&) = delete;
-        XMLElement& operator=(const XMLElement&) = delete;
 
     private:
         const std::string                                   localname;
