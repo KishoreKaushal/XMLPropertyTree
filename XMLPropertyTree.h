@@ -35,17 +35,17 @@ namespace XMLPropertyTree {
         XMLElement(const XMLElement&) = delete;
         XMLElement& operator=(const XMLElement&) = delete;
 
-        virtual std::string getData(const std::string&) const noexcept;
+        virtual std::string getData() const noexcept;
 
-        virtual std::string getAttributeValue(const std::string&) const noexcept;
+        virtual std::string getAttributeValue(const std::string& attr) const noexcept;
 
-        virtual std::shared_ptr<XMLElement> nthChildElement(const int&) const noexcept;
+        virtual std::shared_ptr<XMLElement> nthChildElement(const int& n) const noexcept;
 
         virtual void addChildElement(const std::shared_ptr<XMLElement>&) const noexcept;
 
-        virtual std::string operator[](const std::string&) const noexcept;
+        virtual std::string operator[](const std::string& attr) const noexcept;
 
-        virtual std::shared_ptr<XMLElement> operator[](const int&) const noexcept;
+        virtual std::shared_ptr<XMLElement> operator[](const int& n) const noexcept;
 
         virtual bool empty() const noexcept;
 

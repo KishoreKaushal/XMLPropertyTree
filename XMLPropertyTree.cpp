@@ -4,6 +4,7 @@
 
 #include "XMLPropertyTree.h"
 
+// TODO: XString(arg)() may go out-of-scope : Need to resolve this.
 XMLPropertyTree::XMLElement::XMLElement(const XMLCh *arguri,
                                         const XMLCh *arglocalname,
                                         const XMLCh *argqname,
@@ -24,6 +25,28 @@ XMLPropertyTree::XMLElement::XMLElement(const XMLCh *arguri,
 
 }
 
-std::string XMLPropertyTree::XMLElement::getData(const std::string &) const noexcept {
+std::string XMLPropertyTree::XMLElement::getData() const noexcept {
     return data;
 }
+
+std::string XMLPropertyTree::XMLElement::getAttributeValue(const std::string& attr)
+const noexcept {
+    return mattr.at(attr);
+}
+
+std::shared_ptr<XMLPropertyTree::XMLElement>
+XMLPropertyTree::XMLElement::nthChildElement(const int& n) const noexcept {
+    return vchild.at(n);
+}
+
+std::string XMLPropertyTree::XMLElement::operator[](const std::string &attr)
+const noexcept {
+    return getAttributeValue(attr);
+}
+
+std::shared_ptr<XMLPropertyTree::XMLElement>
+XMLPropertyTree::XMLElement::operator[](const int &n) const noexcept {
+    return nthChildElement(n);
+}
+
+
