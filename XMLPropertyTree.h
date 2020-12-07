@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <vector>
 #include <xercesc/sax2/DefaultHandler.hpp>
+#include <xercesc/sax2/Attributes.hpp>
 #include "XString.h"
 
 
@@ -21,11 +22,11 @@ namespace XMLPropertyTree {
         /**---------------------------------------------------------------------
          * Explicit Constructor for element initialization.
          *--------------------------------------------------------------------*/
-         explicit XMLElement(const XMLCh*               localname,
-                             const XMLCh*               qname,
-                             const XMLCh*               uri,
-                             const XMLCh*               data,
-                             const xercesc::Attributes& attributes) noexcept;
+         explicit XMLElement(const XMLCh*               arguri,
+                             const XMLCh*               arglocalname,
+                             const XMLCh*               argqname,
+                             const XMLCh*               argdata,
+                             const xercesc::Attributes& argattributes) noexcept;
 
         /*----------------------------------------------------------------------
          * Make non-copyable, by deleting copy constructor
@@ -53,7 +54,7 @@ namespace XMLPropertyTree {
         const std::string                                   qname;
         const std::string                                   uri;
         const std::string                                   data;
-        const std::unordered_map<std::string, std::string>  mattr;
+        mutable std::unordered_map<std::string, std::string>mattr;
         mutable std::vector<std::shared_ptr<XMLElement>>    vchild;
     };
 
