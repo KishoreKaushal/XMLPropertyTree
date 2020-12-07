@@ -25,7 +25,6 @@ namespace XMLPropertyTree {
          explicit XMLElement(const XString&             arguri,
                              const XString&             arglocalname,
                              const XString&             argqname,
-                             const XString&             argdata,
                              const xercesc::Attributes& argattributes) noexcept;
 
         /*----------------------------------------------------------------------
@@ -34,6 +33,8 @@ namespace XMLPropertyTree {
          *--------------------------------------------------------------------*/
         XMLElement(const XMLElement&) = delete;
         XMLElement& operator=(const XMLElement&) = delete;
+
+        virtual void setData(const XString& argdata) noexcept;
 
         virtual std::string getData() const noexcept;
 
@@ -47,7 +48,7 @@ namespace XMLPropertyTree {
 
         virtual std::shared_ptr<XMLElement> nthChildElement(const int& n) const noexcept;
 
-        virtual void addChildElement(const std::shared_ptr<XMLElement>& xmlElement) const noexcept;
+        virtual void addChildElement(const std::shared_ptr<XMLElement>& xmlElement) noexcept;
 
         virtual std::string operator[](const std::string& attr) const noexcept;
 
@@ -56,12 +57,12 @@ namespace XMLPropertyTree {
         virtual bool empty() const noexcept;
 
     private:
-        const std::string                                   localname;
-        const std::string                                   qname;
-        const std::string                                   uri;
-        const std::string                                   data;
-        mutable std::unordered_map<std::string, std::string>mattr;
-        mutable std::vector<std::shared_ptr<XMLElement>>    vchild;
+        std::string                                     localname;
+        std::string                                     qname;
+        std::string                                     uri;
+        std::string                                     data;
+        std::unordered_map<std::string, std::string>    mattr;
+        std::vector<std::shared_ptr<XMLElement>>        vchild;
     };
 
     class XMLTree {

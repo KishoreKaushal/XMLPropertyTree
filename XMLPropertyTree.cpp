@@ -4,17 +4,14 @@
 
 #include "XMLPropertyTree.h"
 
-// TODO: XString(arg)() may go out-of-scope : Need to resolve this.
 XMLPropertyTree::XMLElement::XMLElement(const XString&              arguri,
                                         const XString&              arglocalname,
                                         const XString&              argqname,
-                                        const XString&              argdata,
                                         const xercesc::Attributes&  argattributes)
                                         noexcept:
                                             uri(arguri()),
                                             localname(arglocalname()),
-                                            qname(argqname()),
-                                            data(argdata()){
+                                            qname(argqname()) {
 
     // Initializing attribute map
     XMLSize_t numattr = argattributes.getLength();
@@ -24,6 +21,7 @@ XMLPropertyTree::XMLElement::XMLElement(const XString&              arguri,
     }
 
 }
+
 
 std::string XMLPropertyTree::XMLElement::getData() const noexcept {
     return data;
@@ -69,8 +67,12 @@ std::string XMLPropertyTree::XMLElement::getUri() const noexcept {
 }
 
 void XMLPropertyTree::XMLElement::addChildElement(const std::shared_ptr<XMLElement>& xElement)
-const noexcept {
+noexcept {
     vchild.push_back(xElement);
+}
+
+void XMLPropertyTree::XMLElement::setData(const XString &argdata) noexcept {
+    data = argdata();
 }
 
 bool XMLPropertyTree::XMLTree::empty() const noexcept {
