@@ -49,7 +49,7 @@ namespace XMLPropertyTree {
 
         virtual void startDocument() override;
 
-        virtual void startElement(const XMLCh* const            uri,
+        virtual void startElement(const XMLCh* const    uri,
                           const XMLCh* const            localname,
                           const XMLCh* const            qname,
                           const xercesc::Attributes&    attrs) override;
@@ -68,18 +68,25 @@ namespace XMLPropertyTree {
     private:
         std::unique_ptr<XMLPropertyTree::XMLTree> xmltree;
         std::unique_ptr<XMLPropertyTree::XMLElement> rootelement;
-        std::stack<std::shared_ptr<XMLElement>> belt;
+        std::stack<std::unique_ptr<XMLElement>> belt;
     };
 
     void HandlerPropertyTreeFactory::characters(const XMLCh *const chars,
                                                 const XMLSize_t length) {
-
+        XString fchars(chars);
+        belt.top()->setData(fchars);
     }
 
     void HandlerPropertyTreeFactory::endElement(const XMLCh *const uri,
                                                 const XMLCh *const localname,
                                                 const XMLCh *const qname) {
-
+        auto upChildElement = std::move(belt.top());                // supposedly non-root element
+        belt.pop();
+        if (!belt.empty()) {                                          // if non-root
+            belt.top()->addChildElement(std::move(upChildElement));   // add as child of top
+        } else {                                                      // if root
+            rootelement = std::move(upChildElement);                  // make root
+        }
     }
 
     void HandlerPropertyTreeFactory::ignorableWhitespace(const XMLCh *const chars,
@@ -93,7 +100,7 @@ namespace XMLPropertyTree {
     }
 
     void HandlerPropertyTreeFactory::endDocument() {
-        xmltree = std::make_unique<XMLPropertyTree::XMLTree>(rootelement);
+        xmltree = std::make_unique<XMLPropertyTree::XMLTree>(std::move(rootelement));
     }
 
     void HandlerPropertyTreeFactory::startDocument() {
@@ -105,11 +112,16 @@ namespace XMLPropertyTree {
                                                   const XMLCh *const qname,
                                                   const xercesc::Attributes& attrs) {
 
+        XString furi(uri);
+        XString flocalname(localname);
+        XString fqname(qname);
 
+        auto upElement = std::make_unique<XMLElement>(furi, flocalname, fqname, attrs);
+        belt.push(std::move(upElement));
     }
 
     void HandlerPropertyTreeFactory::error(const xercesc::SAXParseException& exc) {
-        xmltree.reset(nullptr);
+        xmltree.reset();
         std::cerr << "\nError at file " << XString(exc.getSystemId())
                   << ", line " << exc.getLineNumber()
                   << ", char " << exc.getColumnNumber()
@@ -118,7 +130,7 @@ namespace XMLPropertyTree {
     }
 
     void HandlerPropertyTreeFactory::fatalError(const xercesc::SAXParseException& exc) {
-        xmltree.reset(nullptr);
+        xmltree.reset();
         std::cerr << "\nFatal Error at file " << XString(exc.getSystemId())
                   << ", line " << exc.getLineNumber()
                   << ", char " << exc.getColumnNumber()
@@ -127,7 +139,7 @@ namespace XMLPropertyTree {
     }
 
     void HandlerPropertyTreeFactory::warning(const xercesc::SAXParseException& exc) {
-        xmltree.reset(nullptr);
+        xmltree.reset();
         std::cerr << "\nWarning at file " << XString(exc.getSystemId())
                   << ", line " << exc.getLineNumber()
                   << ", char " << exc.getColumnNumber()
@@ -137,11 +149,10 @@ namespace XMLPropertyTree {
 
     std::unique_ptr<XMLPropertyTree::XMLTree> HandlerPropertyTreeFactory::getXMLTree() {
         if(xmltree->empty()) {
-            xmltree.reset(nullptr);
+            xmltree.reset();
         }
         return std::move(xmltree);
     }
-
 }
 
 
