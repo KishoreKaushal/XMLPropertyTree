@@ -67,6 +67,7 @@ namespace XMLPropertyTree {
 
     private:
         std::unique_ptr<XMLPropertyTree::XMLTree> xmltree;
+        std::unique_ptr<XMLPropertyTree::XMLElement> rootelement;
         std::stack<std::shared_ptr<XMLElement>> belt;
     };
 
@@ -91,8 +92,12 @@ namespace XMLPropertyTree {
 
     }
 
+    void HandlerPropertyTreeFactory::endDocument() {
+        xmltree = std::make_unique<XMLPropertyTree::XMLTree>(rootelement);
+    }
+
     void HandlerPropertyTreeFactory::startDocument() {
-        xmltree = std::make_unique<XMLPropertyTree::XMLTree>();
+
     }
 
     void HandlerPropertyTreeFactory::startElement(const XMLCh *const uri,
