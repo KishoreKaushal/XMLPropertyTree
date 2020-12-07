@@ -70,5 +70,6 @@ std::string XMLPropertyTree::XMLElement::getUri() const noexcept {
 
 
 bool XMLPropertyTree::XMLTree::empty() const noexcept {
-    return root->empty();
+    if (root) return root->empty();
+    return false;
 }
