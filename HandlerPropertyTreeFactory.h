@@ -17,33 +17,39 @@ namespace XMLPropertyTree {
 
     class HandlerPropertyTreeFactory : public xercesc::DefaultHandler {
     public:
-        HandlerPropertyTreeFactory();
+        HandlerPropertyTreeFactory() = default;
 
         ~HandlerPropertyTreeFactory();
+
+        /**---------------------------------------------------------------------
+         * Making non-copyable. Use std::move semantics.
+         ---------------------------------------------------------------------*/
+
+        HandlerPropertyTreeFactory(const HandlerPropertyTreeFactory&) = delete;
+        HandlerPropertyTreeFactory& operator=(const HandlerPropertyTreeFactory&) = delete;
 
         /**---------------------------------------------------------------------
          * Implementation of the SAX DocumentHandler Interface
          ---------------------------------------------------------------------*/
 
-        void endDocument() override;
+        virtual void endDocument() override;
 
-        void endElement (
-                const XMLCh* const uri,
-                const XMLCh* const localname,
-                const XMLCh* const qname) override;
+        virtual void endElement (const XMLCh* const uri,
+                                 const XMLCh* const localname,
+                                 const XMLCh* const qname) override;
 
-        void characters(const XMLCh*    chars,
-                        const XMLSize_t length) override;
+        virtual void characters(const XMLCh*    chars,
+                                const XMLSize_t length) override;
 
-        void ignorableWhitespace(const XMLCh*       chars,
-                                 const XMLSize_t    length) override;
+        virtual void ignorableWhitespace(const XMLCh*       chars,
+                                         const XMLSize_t    length) override;
 
-        void processingInstruction(const XMLCh* const target,
-                                   const XMLCh* const data) override;
+        virtual void processingInstruction(const XMLCh* const target,
+                                           const XMLCh* const data) override;
 
-        void startDocument() override;
+        virtual void startDocument() override;
 
-        void startElement(const XMLCh* const            uri,
+        virtual void startElement(const XMLCh* const            uri,
                           const XMLCh* const            localname,
                           const XMLCh* const            qname,
                           const xercesc::Attributes&    attrs) override;
@@ -51,11 +57,13 @@ namespace XMLPropertyTree {
         /**---------------------------------------------------------------------
          * Implementation of the SAX ErrorHandler Interface
          ---------------------------------------------------------------------*/
-        void error(const xercesc::SAXParseException& exc) override;
+        virtual void error(const xercesc::SAXParseException& exc) override;
 
-        void fatalError(const xercesc::SAXParseException& exc) override;
+        virtual void fatalError(const xercesc::SAXParseException& exc) override;
 
-        void warning(const xercesc::SAXParseException& exc) override;
+        virtual void warning(const xercesc::SAXParseException& exc) override;
+
+        virtual std::unique_ptr<XMLPropertyTree::XMLTree> getXMLTree();
 
     private:
         std::unique_ptr<XMLPropertyTree::XMLTree> xmltree;
@@ -117,6 +125,10 @@ namespace XMLPropertyTree {
                     << ", char "  << exc.getColumnNumber()
                     << "\n  Message: " << StrX(exc.getMessage())
                     << std::endl;
+    }
+
+    std::unique_ptr<XMLPropertyTree::XMLTree> HandlerPropertyTreeFactory::getXMLTree() {
+        return std::move(xmltree);
     }
 
 }
