@@ -3,8 +3,10 @@
 
 CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o: ../XMLPropertyTree.cpp
 CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o: ../XMLPropertyTree.h
+CMakeFiles/XMLPropertyTree.dir/XMLPropertyTree.cpp.o: ../XString.h
 
-CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../CreatePropertyTreeHandler.h
+CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../HandlerPropertyTreeFactory.h
+CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../XMLPropertyTree.h
+CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../XString.h
 CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../main.cpp
-CMakeFiles/XMLPropertyTree.dir/main.cpp.o: ../main.h
 
