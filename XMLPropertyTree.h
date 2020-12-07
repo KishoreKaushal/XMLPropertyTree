@@ -48,7 +48,11 @@ namespace XMLPropertyTree {
 
     class XMLTree {
     public:
-        XMLTree() = default;
+        /**---------------------------------------------------------------------
+         * Constructor: uses std::move semantic to initialize XMLTree.
+         *--------------------------------------------------------------------*/
+        explicit XMLTree(std::unique_ptr<XMLElement>& argroot)
+            : root(std::move(argroot)) {}
 
         ~XMLTree();
 
@@ -58,7 +62,7 @@ namespace XMLPropertyTree {
         virtual bool empty() const noexcept;
 
     private:
-        const std::shared_ptr<XMLElement>   root;
+        const std::unique_ptr<XMLElement>   root;
     };
 }
 
