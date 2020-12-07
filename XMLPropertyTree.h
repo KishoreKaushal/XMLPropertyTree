@@ -52,8 +52,8 @@ namespace XMLPropertyTree {
 
         ~XMLTree();
 
-        XMLTree(const XMLElement&) = delete;
-        XMLTree& operator=(const XMLElement&) = delete;
+        XMLTree(const XMLTree&) = delete;
+        XMLTree& operator=(const XMLTree&) = delete;
 
         virtual bool empty() const noexcept;
 
