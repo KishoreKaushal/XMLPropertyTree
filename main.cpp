@@ -1,6 +1,6 @@
 #include <iostream>
 #include "HandlerPropertyTreeFactory.h"
-#include "main.h"
+#include "XString.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;

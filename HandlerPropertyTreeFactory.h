@@ -9,7 +9,7 @@
 
 #include <xercesc/sax2/DefaultHandler.hpp>
 #include "XMLPropertyTree.h"
-#include "main.h"
+#include "XString.h"
 #include <stack>
 #include <memory>
 
@@ -110,28 +110,28 @@ namespace XMLPropertyTree {
 
     void HandlerPropertyTreeFactory::error(const xercesc::SAXParseException& exc) {
         xmltree.reset(nullptr);
-        std::cerr   << "\nError at file " << StrX(exc.getSystemId())
-                    << ", line "  << exc.getLineNumber()
-                    << ", char "  << exc.getColumnNumber()
-                    << "\n  Message: " << StrX(exc.getMessage())
+        std::cerr << "\nError at file " << XString(exc.getSystemId())
+                  << ", line " << exc.getLineNumber()
+                  << ", char " << exc.getColumnNumber()
+                  << "\n  Message: " << XString(exc.getMessage())
                     << std::endl;
     }
 
     void HandlerPropertyTreeFactory::fatalError(const xercesc::SAXParseException& exc) {
         xmltree.reset(nullptr);
-        std::cerr   << "\nFatal Error at file " << StrX(exc.getSystemId())
-                    << ", line "  << exc.getLineNumber()
-                    << ", char "  << exc.getColumnNumber()
-                    << "\n  Message: " << StrX(exc.getMessage())
+        std::cerr << "\nFatal Error at file " << XString(exc.getSystemId())
+                  << ", line " << exc.getLineNumber()
+                  << ", char " << exc.getColumnNumber()
+                  << "\n  Message: " << XString(exc.getMessage())
                     << std::endl;
     }
 
     void HandlerPropertyTreeFactory::warning(const xercesc::SAXParseException& exc) {
         xmltree.reset(nullptr);
-        std::cerr   << "\nWarning at file " << StrX(exc.getSystemId())
-                    << ", line "  << exc.getLineNumber()
-                    << ", char "  << exc.getColumnNumber()
-                    << "\n  Message: " << StrX(exc.getMessage())
+        std::cerr << "\nWarning at file " << XString(exc.getSystemId())
+                  << ", line " << exc.getLineNumber()
+                  << ", char " << exc.getColumnNumber()
+                  << "\n  Message: " << XString(exc.getMessage())
                     << std::endl;
     }
 
