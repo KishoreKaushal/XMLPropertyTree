@@ -22,6 +22,13 @@ public:
         return fLocalForm;
     }
 
+    /**
+     * Making XString a callable object.
+     */
+    [[nodiscard]] const char* operator()(){
+        return fLocalForm;
+    }
+
 private:
     char* fLocalForm;
 };
