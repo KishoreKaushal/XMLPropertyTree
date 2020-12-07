@@ -92,7 +92,7 @@ namespace XMLPropertyTree {
     }
 
     void HandlerPropertyTreeFactory::startDocument() {
-
+        xmltree = std::make_unique<XMLPropertyTree::XMLTree>();
     }
 
     void HandlerPropertyTreeFactory::startElement(const XMLCh *const uri,
@@ -131,6 +131,9 @@ namespace XMLPropertyTree {
     }
 
     std::unique_ptr<XMLPropertyTree::XMLTree> HandlerPropertyTreeFactory::getXMLTree() {
+        if(xmltree->empty()) {
+            xmltree.reset(nullptr);
+        }
         return std::move(xmltree);
     }
 
