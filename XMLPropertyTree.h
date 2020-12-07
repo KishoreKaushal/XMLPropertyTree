@@ -46,13 +46,13 @@ namespace XMLPropertyTree {
 
         virtual std::string getAttributeValue(const std::string& attr) const noexcept;
 
-        virtual std::shared_ptr<XMLElement> nthChildElement(const int& n) const noexcept;
+        virtual XMLElement* nthChildElement(const int& n) const noexcept;
 
-        virtual void addChildElement(const std::shared_ptr<XMLElement>& xmlElement) noexcept;
+        virtual void addChildElement(std::unique_ptr<XMLElement> xmlElement) noexcept;
 
         virtual std::string operator[](const std::string& attr) const noexcept;
 
-        virtual std::shared_ptr<XMLElement> operator[](const int& n) const noexcept;
+        virtual XMLElement* operator[](const int& n) const noexcept;
 
         virtual bool empty() const noexcept;
 
@@ -62,7 +62,7 @@ namespace XMLPropertyTree {
         std::string                                     uri;
         std::string                                     data;
         std::unordered_map<std::string, std::string>    mattr;
-        std::vector<std::shared_ptr<XMLElement>>        vchild;
+        std::vector<std::unique_ptr<XMLElement>>        vchild;
     };
 
     class XMLTree {
@@ -70,10 +70,8 @@ namespace XMLPropertyTree {
         /**---------------------------------------------------------------------
          * Constructor: uses std::move semantic to initialize XMLTree.
          *--------------------------------------------------------------------*/
-        explicit XMLTree(std::unique_ptr<XMLElement>& argroot)
+        explicit XMLTree(std::unique_ptr<XMLElement> argroot)
             : root(std::move(argroot)) {}
-
-        ~XMLTree();
 
         XMLTree(const XMLTree&) = delete;
         XMLTree& operator=(const XMLTree&) = delete;
