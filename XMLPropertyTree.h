@@ -37,6 +37,12 @@ namespace XMLPropertyTree {
 
         virtual std::string getData() const noexcept;
 
+        virtual std::string getLocalname() const noexcept;
+
+        virtual std::string getQname() const noexcept;
+
+        virtual std::string getUri() const noexcept;
+
         virtual std::string getAttributeValue(const std::string& attr) const noexcept;
 
         virtual std::shared_ptr<XMLElement> nthChildElement(const int& n) const noexcept;

@@ -49,4 +49,23 @@ XMLPropertyTree::XMLElement::operator[](const int &n) const noexcept {
     return nthChildElement(n);
 }
 
+bool XMLPropertyTree::XMLElement::empty() const noexcept {
+    if(data.empty() and mattr.empty() and vchild.empty()) {
+        return true;
+    }
+    return false;
+}
+
+std::string XMLPropertyTree::XMLElement::getLocalname() const noexcept {
+    return localname;
+}
+
+std::string XMLPropertyTree::XMLElement::getQname() const noexcept {
+    return qname;
+}
+
+std::string XMLPropertyTree::XMLElement::getUri() const noexcept {
+    return uri;
+}
+
 
