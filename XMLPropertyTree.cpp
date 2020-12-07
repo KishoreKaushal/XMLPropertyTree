@@ -32,9 +32,9 @@ const noexcept {
     return mattr.at(attr);
 }
 
-std::shared_ptr<XMLPropertyTree::XMLElement>
+XMLPropertyTree::XMLElement*
 XMLPropertyTree::XMLElement::nthChildElement(const int& n) const noexcept {
-    return vchild.at(n);
+    return vchild.at(n).get();
 }
 
 std::string XMLPropertyTree::XMLElement::operator[](const std::string &attr)
@@ -42,7 +42,7 @@ const noexcept {
     return getAttributeValue(attr);
 }
 
-std::shared_ptr<XMLPropertyTree::XMLElement>
+XMLPropertyTree::XMLElement*
 XMLPropertyTree::XMLElement::operator[](const int &n) const noexcept {
     return nthChildElement(n);
 }
@@ -66,9 +66,9 @@ std::string XMLPropertyTree::XMLElement::getUri() const noexcept {
     return uri;
 }
 
-void XMLPropertyTree::XMLElement::addChildElement(const std::shared_ptr<XMLElement>& xElement)
+void XMLPropertyTree::XMLElement::addChildElement(std::unique_ptr<XMLElement> xElement)
 noexcept {
-    vchild.push_back(xElement);
+    vchild.push_back(std::move(xElement));
 }
 
 void XMLPropertyTree::XMLElement::setData(const XString &argdata) noexcept {
