@@ -19,8 +19,6 @@ namespace XMLPropertyTree {
     public:
         HandlerPropertyTreeFactory() = default;
 
-        ~HandlerPropertyTreeFactory();
-
         /**---------------------------------------------------------------------
          * Making non-copyable. Use std::move semantics.
          ---------------------------------------------------------------------*/
