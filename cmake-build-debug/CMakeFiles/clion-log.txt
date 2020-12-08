@@ -1,4 +1,4 @@
-/home/kaushal/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.8194.17/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/kaushal/CLionProjects/XMLPropertyTree
+/home/kaushal/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/203.5981.166/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/kaushal/CLionProjects/XMLPropertyTree
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/kaushal/CLionProjects/XMLPropertyTree/cmake-build-debug

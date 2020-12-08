@@ -7,5 +7,5 @@ find_library(XERCESC xerces-c)
 
 file(GLOB SOURCES "*.cpp")
 
-add_executable(XMLPropertyTree ${SOURCES} main.h)
+add_executable(XMLPropertyTree ${SOURCES})
 target_link_libraries(XMLPropertyTree ${XERCESC})

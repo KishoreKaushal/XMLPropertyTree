@@ -91,9 +91,6 @@
 		<Unit filename="/home/kaushal/CLionProjects/XMLPropertyTree/main.cpp">
 			<Option target="XMLPropertyTree"/>
 		</Unit>
-		<Unit filename="/home/kaushal/CLionProjects/XMLPropertyTree/main.h">
-			<Option target="XMLPropertyTree"/>
-		</Unit>
 		<Unit filename="/home/kaushal/CLionProjects/XMLPropertyTree/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
