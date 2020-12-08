@@ -46,10 +46,8 @@ int main(int argC, char* argV[]) {
     //  Create a SAX parser object. Then, according to what we were told on
     //  the command line, set it to validate or not.
     //
-    xercesc::SAX2XMLReader* parser = xercesc::XMLReaderFactory::createXMLReader();
-
     // creating a unique_ptr for automatic memory management.
-    std::unique_ptr<xercesc::SAX2XMLReader> uptrParser(parser);
+    std::unique_ptr<xercesc::SAX2XMLReader> parser(xercesc::XMLReaderFactory::createXMLReader());
 
     parser->setFeature(xercesc::XMLUni::fgSAX2CoreNameSpaces, doNamespaces);
     parser->setFeature(xercesc::XMLUni::fgXercesSchema, doSchema);
@@ -94,12 +92,6 @@ int main(int argC, char* argV[]) {
         xercesc::XMLPlatformUtils::Terminate();
         return errorCode;
     }
-
-    // TODO: Usage of smart-pointers eliminates the need of calling smart pointers.
-    //
-    //  Delete the parser itself.  Must be done prior to calling Terminate, below.
-    //
-    // delete parser;   // Not needed as managed by unique_ptr. uptrParser
 
     // And call the termination method
     xercesc::XMLPlatformUtils::Terminate();
