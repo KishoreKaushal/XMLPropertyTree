@@ -1,0 +1,3 @@
+/home/kaushal/CLionProjects/XMLPropertyTree/CMakeFiles/rebuild_cache.dir
+/home/kaushal/CLionProjects/XMLPropertyTree/CMakeFiles/edit_cache.dir
+/home/kaushal/CLionProjects/XMLPropertyTree/CMakeFiles/XMLPropertyTree.dir

@@ -51,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& target, const XMLPropertyTree::XML
 }
 
 inline std::ostream& operator<<(std::ostream& target, const XMLPropertyTree::XMLTree& toDump) {
-    target << toDump.get();
+    target << *(toDump.get());
     return target;
 }
 
@@ -80,7 +80,13 @@ int main(int argC, char* argV[]) {
     //  the command line, set it to validate or not.
     //
     // creating a unique_ptr for automatic memory management.
-    std::unique_ptr<xercesc::SAX2XMLReader> parser(xercesc::XMLReaderFactory::createXMLReader());
+
+    xercesc::SAX2XMLReader* parser = xercesc::XMLReaderFactory::createXMLReader();
+
+//    std::unique_ptr<xercesc::SAX2XMLReader> uptrParser(parser);
+
+    parser->setFeature(xercesc::XMLUni::fgSAX2CoreValidation, true);
+    parser->setFeature(xercesc::XMLUni::fgXercesDynamic, false);
 
     parser->setFeature(xercesc::XMLUni::fgSAX2CoreNameSpaces, doNamespaces);
     parser->setFeature(xercesc::XMLUni::fgXercesSchema, doSchema);
@@ -97,7 +103,6 @@ int main(int argC, char* argV[]) {
     //  handler for the parser. Then parse the file and catch any exceptions
     //  that propogate out
     //
-
     XMLSize_t errorCount = 0;
     int errorCode = 0;
     try
@@ -106,6 +111,9 @@ int main(int argC, char* argV[]) {
         parser->setContentHandler(&handler);
         parser->setErrorHandler(&handler);
         parser->parse(xmlFile);
+        std::unique_ptr<XMLPropertyTree::XMLTree> ptree = std::move(handler.getXMLTree());
+        std::cout << "Printing XMLTree: " << std::endl;
+        std::cout << *(ptree.get()) << std::endl;
         errorCount = parser->getErrorCount();
     }
     catch (const xercesc::OutOfMemoryException&)
@@ -126,8 +134,11 @@ int main(int argC, char* argV[]) {
         return errorCode;
     }
 
+    delete parser;
+
     // And call the termination method
     xercesc::XMLPlatformUtils::Terminate();
+
 
     if (errorCount > 0)
         return 4;
