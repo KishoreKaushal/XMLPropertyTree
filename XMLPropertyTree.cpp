@@ -75,7 +75,19 @@ void XMLPropertyTree::XMLElement::setData(const XString &argdata) noexcept {
     data = argdata();
 }
 
+const std::unordered_map<std::string, std::string> &XMLPropertyTree::XMLElement::getAttributes() const noexcept {
+    return mattr;
+}
+
+size_t XMLPropertyTree::XMLElement::getNumChildElements() const noexcept {
+    return vchild.size();
+}
+
 bool XMLPropertyTree::XMLTree::empty() const noexcept {
     if (root) return root->empty();
     return false;
+}
+
+XMLPropertyTree::XMLElement *XMLPropertyTree::XMLTree::get() const noexcept {
+    return root.get();
 }

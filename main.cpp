@@ -22,6 +22,39 @@ static                         bool       schemaFullChecking = true;
 static                         bool       namespacePrefixes  = false;
 static                         XMLCh*     externalSchema     = nullptr;
 
+inline std::ostream& operator<<(std::ostream& target, const XMLPropertyTree::XMLElement& toDump) {
+    const std::unordered_map<std::string, std::string>& mattr = toDump.getAttributes();
+    const size_t numChildElements = toDump.getNumChildElements();
+
+    target  << "{"
+            << "qname : " << toDump.getQname() << "\n"
+            << "localname : " << toDump.getLocalname() << "\n"
+            << "uri : " << toDump.getUri() << "\n"
+            << "data : " << toDump.getData()  << "\n"
+
+            << "attributes : [\n";
+            for (auto &item : mattr) {
+                target << item.first << "=\"" << item.second << "\",\n";
+            }
+    target  << "]\n"
+            << "childElements : [\n";
+
+            XMLPropertyTree::XMLElement* childElement;
+            for (size_t n = 0; n < numChildElements; n++) {
+                childElement = toDump.nthChildElement(n);
+                target << *childElement << "\n";
+            }
+
+    target  << "]\n"
+            << "}\n";
+    return target;
+}
+
+inline std::ostream& operator<<(std::ostream& target, const XMLPropertyTree::XMLTree& toDump) {
+    target << toDump.get();
+    return target;
+}
+
 int main(int argC, char* argV[]) {
 
     try {

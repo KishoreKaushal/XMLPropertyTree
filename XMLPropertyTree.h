@@ -56,6 +56,10 @@ namespace XMLPropertyTree {
 
         virtual bool empty() const noexcept;
 
+        virtual const std::unordered_map<std::string, std::string>& getAttributes() const noexcept;
+
+        virtual size_t getNumChildElements() const noexcept;
+
     private:
         std::string                                     localname;
         std::string                                     qname;
@@ -77,6 +81,8 @@ namespace XMLPropertyTree {
         XMLTree& operator=(const XMLTree&) = delete;
 
         virtual bool empty() const noexcept;
+
+        XMLElement* get() const noexcept;
 
     private:
         const std::unique_ptr<XMLElement>   root;
