@@ -48,6 +48,9 @@ int main(int argC, char* argV[]) {
     //
     xercesc::SAX2XMLReader* parser = xercesc::XMLReaderFactory::createXMLReader();
 
+    // creating a unique_ptr for automatic memory management.
+    std::unique_ptr<xercesc::SAX2XMLReader> uptrParser(parser);
+
     parser->setFeature(xercesc::XMLUni::fgSAX2CoreNameSpaces, doNamespaces);
     parser->setFeature(xercesc::XMLUni::fgXercesSchema, doSchema);
     parser->setFeature(xercesc::XMLUni::fgXercesHandleMultipleImports, true);
@@ -96,7 +99,7 @@ int main(int argC, char* argV[]) {
     //
     //  Delete the parser itself.  Must be done prior to calling Terminate, below.
     //
-    delete parser;
+    // delete parser;   // Not needed as managed by unique_ptr. uptrParser
 
     // And call the termination method
     xercesc::XMLPlatformUtils::Terminate();
