@@ -15,7 +15,6 @@ static void usage() {
 }
 
 static                         char*      xmlFile            = 0;
-static xercesc::SAX2XMLReader::ValSchemes valScheme          = xercesc::SAX2XMLReader::Val_Auto;
 static                         bool       doNamespaces       = true;
 static                         bool       doSchema           = true;
 static                         bool       schemaFullChecking = true;
@@ -79,11 +78,8 @@ int main(int argC, char* argV[]) {
     //  Create a SAX parser object. Then, according to what we were told on
     //  the command line, set it to validate or not.
     //
-    // creating a unique_ptr for automatic memory management.
 
     xercesc::SAX2XMLReader* parser = xercesc::XMLReaderFactory::createXMLReader();
-
-//    std::unique_ptr<xercesc::SAX2XMLReader> uptrParser(parser);
 
     parser->setFeature(xercesc::XMLUni::fgSAX2CoreValidation, true);
     parser->setFeature(xercesc::XMLUni::fgXercesDynamic, false);
